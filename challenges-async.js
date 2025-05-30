@@ -101,14 +101,14 @@ function promised (val) {
   const myPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(val);
-    }, 1000);
+    }, 2000);
 	});
   return myPromise;
 }
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
- const createPromise = promised('wait for it...');
- createPromise.then((val) => console.log(val)); 
+ //const createPromise = promised('wait for it...');
+ //createPromise.then((val) => console.log(val)); 
  //will log "wait for it..." to the console after 2 seconds
 
 /* CHALLENGE 9 */
@@ -116,31 +116,56 @@ function promised (val) {
 class SecondClock {
   constructor(cb) {
     // ADD CODE HERE
+    this.cb =  cb
+    this.myInterval;
+    this.timerSec=0;
   }
   // ADD METHODS HERE
+   start(){
+     //let timerSec = 0;
+     this.myInterval = setInterval(() => {
+       if(this.timerSec == 60) this.timerSec = 0
+       this.cb(++this.timerSec )
+     }, 1000) // use 100 for testing
+  }
+   reset(){
+     clearInterval(this.myInterval)  
+      this.timerSec=0   
+  }
 }
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
-// const clock = new SecondClock((val) => { console.log(val) });
-// console.log("Started Clock.");
-// clock.start();
-// setTimeout(() => {
-//     clock.reset();
-//     console.log("Stopped Clock after 6 seconds.");
-// }, 6000);
+ //const clock = new SecondClock((val) => { console.log(val) });
+ //console.log("Started Clock.");
+ //clock.start();
+ //setTimeout(() => {
+     //clock.reset();
+     //console.log("Stopped Clock after 6 seconds.");
+ //}, 6000);
 
 /* CHALLENGE 10 */
 
 function debounce(callback, interval) {
   // ADD CODE HERE
+  function createFunc(){
+    console.log(callback())
+    setTimeout(function() { callback() }, interval)
+    
+  }
+  return createFunc;
 }
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
-// function giveHi() { return 'hi'; }
-// const giveHiSometimes = debounce(giveHi, 3000);
-// console.log(giveHiSometimes()); // -> 'hi'
-// setTimeout(function() { console.log(giveHiSometimes()); }, 2000); // -> undefined
-// setTimeout(function() { console.log(giveHiSometimes()); }, 4000); // -> undefined
-// setTimeout(function() { console.log(giveHiSometimes()); }, 8000); // -> 'hi'
+ function giveHi() { return 'hi'; }
+ //const giveHiSometimes = debounce(giveHi, 3000);
+ //console.log(giveHiSometimes()); // -> 'hi'
+ //setTimeout(function() { console.log(giveHiSometimes()); }, 2000); // -> undefined
+ //setTimeout(function() { console.log(giveHiSometimes()); }, 4000); // -> undefined
+ //setTimeout(function() { console.log(giveHiSometimes()); }, 8000); // -> 'hi'
 
-
+// Note By Narjiss : 
+/*
+What i have left in these challenges: 
+-Challenge 8
+-Challenge 10
+*/
